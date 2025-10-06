@@ -1,0 +1,160 @@
+.player-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.player-bar-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.player-bar-content:hover {
+  opacity: 0.8;
+}
+
+.player-bar-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-right: 1rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.player-bar-info {
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.player-bar-info h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 0 0.25rem 0;
+}
+
+.player-bar-info p {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-bar-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+.control-btn.play-btn {
+  background: #a855f7;
+  width: 48px;
+  height: 48px;
+  margin: 0 0.25rem;
+}
+
+.control-btn.play-btn:hover {
+  background: #9333ea;
+  transform: scale(1.1);
+}
+
+.control-btn.expand-btn {
+  color: #94a3b8;
+}
+
+.control-btn.expand-btn:hover {
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .player-bar {
+    height: 72px;
+    padding: 0 1rem;
+  }
+
+  .player-bar-logo {
+    width: 48px;
+    height: 48px;
+    margin-right: 0.75rem;
+  }
+
+  .player-bar-info h4 {
+    font-size: 0.9rem;
+  }
+
+  .player-bar-info p {
+    font-size: 0.8rem;
+  }
+
+  .control-btn.play-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .player-bar-controls {
+    gap: 0.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .hide-mobile {
+    display: none;
+  }
+}

@@ -1,0 +1,16 @@
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%);
+  background-attachment: fixed;
+}
+
+.main-content {
+  padding-top: 80px;
+  padding-bottom: 140px;
+  min-height: 100vh;
+}
+
+/* Ajuste para cuando el reproductor esté visible */
+.player-active .main-content {
+  padding-bottom: 200px;
+}

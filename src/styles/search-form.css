@@ -1,0 +1,122 @@
+.search-form {
+  margin-bottom: 2rem;
+}
+
+.search-input-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.875rem 3rem 0.875rem 3rem;
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.search-input::placeholder {
+  color: #64748b;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #a855f7;
+  background: rgba(30, 41, 59, 0.7);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+}
+
+.clear-input-btn {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.clear-input-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.search-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.search-btn,
+.clear-btn {
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.search-btn {
+  background: #a855f7;
+  color: white;
+  flex: 1;
+}
+
+.search-btn:hover {
+  background: #9333ea;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+}
+
+.search-btn:active {
+  transform: translateY(0);
+}
+
+.clear-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.clear-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .search-input {
+    padding: 0.75rem 2.5rem 0.75rem 2.5rem;
+    font-size: 0.95rem;
+  }
+
+  .search-buttons {
+    flex-direction: column;
+  }
+
+  .search-btn,
+  .clear-btn {
+    width: 100%;
+  }
+}

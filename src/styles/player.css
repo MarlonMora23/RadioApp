@@ -1,0 +1,103 @@
+/* Barra inferior */
+.now-playing-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: #111;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  border-top: 1px solid #222;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.station-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.station-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.station-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.station-country {
+  font-size: 0.8rem;
+  color: #bbb;
+  margin: 0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+}
+
+.play-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* Vista expandida */
+.player-expanded-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+}
+
+.player-expanded {
+  text-align: center;
+  color: #fff;
+  max-width: 400px;
+  width: 100%;
+  padding: 1rem;
+}
+
+.close-expanded {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.expanded-logo {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.expanded-controls button {
+  background: #1db954;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 24px;
+  font-size: 1rem;
+  cursor: pointer;
+}

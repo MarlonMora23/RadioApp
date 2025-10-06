@@ -1,0 +1,70 @@
+.country-filters {
+  margin-bottom: 2rem;
+}
+
+.country-filters-label {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  margin: 0 0 0.75rem 0;
+  font-weight: 500;
+}
+
+.country-filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.country-btn {
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.country-flag {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.country-name {
+  line-height: 1;
+}
+
+.country-btn:hover {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: #a855f7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
+}
+
+.country-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .country-filters-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .country-btn {
+    padding: 0.75rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .country-flag {
+    font-size: 1.25rem;
+  }
+}

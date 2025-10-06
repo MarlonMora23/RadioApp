@@ -1,0 +1,29 @@
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.loader-container.fullscreen {
+  height: 60vh;
+  min-height: 400px;
+}
+
+.loader-text {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  margin: 0;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

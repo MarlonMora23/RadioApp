@@ -1,0 +1,105 @@
+.search-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.search-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.search-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 0.5rem 0;
+}
+
+.search-subtitle {
+  font-size: 1.125rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.results-info {
+  margin: 2rem 0 1rem 0;
+  padding: 0 0.5rem;
+}
+
+.results-count {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.stations-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  color: #fca5a5;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.empty-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 0.5rem 0;
+}
+
+.empty-subtitle {
+  color: #94a3b8;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-page {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .search-title {
+    font-size: 2rem;
+  }
+
+  .search-subtitle {
+    font-size: 1rem;
+  }
+
+  .stations-list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-title {
+    font-size: 1.75rem;
+  }
+
+  .stations-list {
+    grid-template-columns: 1fr;
+  }
+}
