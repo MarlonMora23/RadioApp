@@ -1,4 +1,3 @@
-// vite.config.js
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
@@ -19,7 +18,5 @@ export default defineConfig({
         rewrite: (p) => p.replace(/^\/ti/, ""),
       },
     },
-    // opcional: desactiva el overlay de errores si te molesta
-    // hmr: { overlay: false },
   },
 });

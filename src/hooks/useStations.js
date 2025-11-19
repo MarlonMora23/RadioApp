@@ -1,8 +1,8 @@
 import { useState, useCallback, useRef } from "react";
 import axios from "axios";
 
-const RB = "/rb/json";
-const TI = "/ti";
+const apiBaseRB = import.meta.env.VITE_RB_URL;
+const apiBaseTI = import.meta.env.VITE_TI_URL;
 
 // Tamaño de lote para paginación incremental
 const PAGE_SIZE = 50;
@@ -50,7 +50,7 @@ export default function useRadios() {
     // --- RadioBrowser ---
     try {
       const rb = await axios.get(
-        `${RB}/stations/bycountry/${encodeURIComponent(country)}`,
+        `${apiBaseRB}/stations/bycountry/${encodeURIComponent(country)}`,
         { timeout: 12000 }
       );
 
@@ -72,7 +72,7 @@ export default function useRadios() {
     // --- TuneIn ---
     if (results.length === 0) {
       try {
-        const ti = await axios.get(`${TI}/Search.ashx`, {
+        const ti = await axios.get(`${apiBaseTI}/Search.ashx`, {
           params: { query: country, render: "json", formats: "mp3,aac" },
           timeout: 12000,
         });
@@ -93,7 +93,7 @@ export default function useRadios() {
         setError(e.message || "Error en TuneIn");
       }
     }
-
+      
     // 3️⃣ Guardar en caché y paginar
     cacheRef.current.byCountry[country] = results;
     paginationRef.current = {
@@ -125,32 +125,22 @@ export default function useRadios() {
     setLoading(true);
     setError(null);
 
-    // Revisar caché
+    // 1️⃣ Revisar caché
     if (cacheRef.current.byName[name]) {
-      const cached = cacheRef.current.byName[name];
-
-      paginationRef.current = {
-        country: null,
-        allResults: cached,
-        currentPage: 1,
-      };
-
-      setRadios(cached.slice(0, PAGE_SIZE));
-      setHasMore(cached.length > PAGE_SIZE);
+      setRadios(cacheRef.current.byName[name]);
       setLoading(false);
       return;
     }
 
-    // Buscar en RadioBrowser
-    let results = [];
+    // 2️⃣ Buscar en RadioBrowser
     try {
       const rb = await axios.get(
-        `${RB}/stations/search?name=${encodeURIComponent(name)}`,
+        `${apiBaseRB}/stations/search?name=${encodeURIComponent(name)}`,
         { timeout: 12000 }
       );
 
       if (Array.isArray(rb.data) && rb.data.length) {
-        results = rb.data.map((r) => ({
+        const mapped = rb.data.map((r) => ({
           id: r.stationuuid,
           name: r.name,
           country: r.country,
@@ -159,49 +149,18 @@ export default function useRadios() {
           tags: typeof r.tags === "string" ? r.tags : "",
           source: "RadioBrowser",
         }));
+        cacheRef.current.byName[name] = mapped;
+        setRadios(mapped);
+        setLoading(false);
+        return;
       }
     } catch (e) {
-      // ignorar; si no hay resultados debajo se manejará
+      
     }
 
-    if (results.length === 0) {
-      setRadios([]);
-      setHasMore(false);
-      setError(`No se encontraron emisoras con el nombre "${name}".`);
-      setLoading(false);
-      return;
-    }
-
-    // Cache + paginación
-    cacheRef.current.byName[name] = results;
-
-    paginationRef.current = {
-      country: null,
-      allResults: results,
-      currentPage: 1,
-    };
-
-    setRadios(results.slice(0, PAGE_SIZE));
-    setHasMore(results.length > PAGE_SIZE);
+    setRadios([]);
+    setError(`No se encontraron emisoras con el nombre "${name}".`);
     setLoading(false);
-  }, []);
-
-  // Scroll-infinito: agregar
-  const fetchMoreByName = useCallback(() => {
-    const { allResults, currentPage } = paginationRef.current;
-
-    if (!allResults.length) return;
-
-    const nextPage = currentPage + 1;
-
-    const start = (nextPage - 1) * PAGE_SIZE;
-    const end = start + PAGE_SIZE;
-
-    const newItems = allResults.slice(start, end);
-
-    setRadios((prev) => [...prev, ...newItems]);
-    paginationRef.current.currentPage = nextPage;
-    setHasMore(allResults.length > end);
   }, []);
 
   const clearRadios = useCallback(() => {
@@ -217,7 +176,6 @@ export default function useRadios() {
     fetchByCountry,
     fetchMoreByCountry,
     fetchByName,
-    fetchMoreByName,
     clearRadios,
   };
 }
