@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useStations from "../hooks/useStations";
 import StationCard from "../components/StationCard";
 import CountryFilterButtons from "../components/CountryFilterButtons";
@@ -9,24 +9,66 @@ import "../styles/search-page.css";
 const PRESET_COUNTRIES = ["Colombia", "Peru", "Mexico", "Canada", "Spain"];
 
 export default function SearchPage() {
-  const { radios, loading, error, fetchByName, fetchByCountry, clearRadios } =
-    useStations();
+  const {
+    radios,
+    loading,
+    error,
+    hasMore,
+    fetchByName,
+    fetchByCountry,
+    fetchMoreByCountry,
+    fetchMoreByName,
+    clearRadios,
+  } = useStations();
   const [query, setQuery] = useState("");
+  const [hasSearched, setHasSearched] = useState(false);
+  const [searchMode, setSearchMode] = useState(null);
+  const [activeCountry, setActiveCountry] = useState(null);
 
   const handleSearch = (e) => {
     if (query.trim() === "") return;
+
+    setHasSearched(true);
+    setSearchMode("name");
+    setActiveCountry(null);
+
     fetchByName(query);
   };
 
   const handleCountryClick = (country) => {
-    fetchByCountry(country);
+    setSearchMode("country");
+    setHasSearched(true);
+    setActiveCountry(country);
     setQuery("");
+
+    fetchByCountry(country);
   };
 
   const handleClear = () => {
     clearRadios();
     setQuery("");
+    setHasSearched(false);
+    setSearchMode(null);
+    setActiveCountry(null);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const threshold = document.body.offsetHeight - 300;
+
+      if (scrollPosition >= threshold && hasMore && !loading) {
+        if (searchMode === "name") {
+          fetchMoreByName(query);
+        } else if (searchMode === "country" && activeCountry) {
+          fetchMoreByCountry(activeCountry);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [query, searchMode, activeCountry, hasMore, loading]);
 
   return (
     <div className="search-page">
@@ -61,7 +103,7 @@ export default function SearchPage() {
         <>
           <div className="results-info">
             <p className="results-count">
-              {radios.length} emisoras encontradas
+              Mostrando {radios.length} emisoras
             </p>
           </div>
 
@@ -77,7 +119,7 @@ export default function SearchPage() {
         </>
       )}
 
-      {!loading && !error && radios.length === 0 && query && (
+      {!loading && !error && radios.length === 0 && hasSearched && (
         <div className="empty-state">
           <div className="empty-icon">🔍</div>
           <h3 className="empty-title">No se encontraron emisoras</h3>

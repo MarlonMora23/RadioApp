@@ -57,7 +57,7 @@ export default function HomePage() {
         <>
           <div className="stations-info">
             <p className="stations-count">
-              {radios.length} emisoras disponibles
+              Mostrando {radios.length} emisoras
             </p>
           </div>
 

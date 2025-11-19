@@ -17,8 +17,6 @@ export default function PlayerExpanded() {
     setExpanded,
   } = useAudioPlayer();
 
-  console.log(currentStation)
-
   return (
     <AnimatePresence>
       {expanded && currentStation && (
@@ -71,12 +69,12 @@ export default function PlayerExpanded() {
               />
             </div>
 
-            <div className="player-expanded-footer">
+            {/* <div className="player-expanded-footer">
               {currentStation.tags && (
                 <p className="tags">{currentStation.tags}</p>
               )}
               {!currentStation.tags && <p className="tags">No tags</p>}
-            </div>
+            </div> */}
           </motion.div>
         </motion.div>
       )}
